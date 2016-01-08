@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>  
+</head>
+<body>
+<form ng-app="TestApp" ng-controller="Test" name="myForm"> <!-- app initialization -->
+<p>Name:<br>
+<input type="text" name="user" ng-model="user" required ng-pattern="/^[a-zA-Z\s]*$/"> <!-- defined input restrictions;name can't be blank or numeric -->
+<span ng-show="myForm.user.$error.pattern">Name must be letters only.</span> <!-- error message will be shown if input consists of character other than letters -->
+<span ng-show="myForm.user.$error.required">Name can't be blank.</span> <!-- error message will be shown if input is blank -->
+</p>
+<!-- 
+Button is disabled until an acceptable input has been entered.
+When button is clicked, function getn6ame() is called to retrieve the returned message from the REST API -->
+<button ng-click="getname()" class="btn btn-primary" ng-disabled="myForm.user.$error.pattern || myForm.user.$error.required">Hire me!</button>
+<!-- Read data retrieved from the server through HTTP GET request-->
+<!-- Only get the message field -->
+<br><label ng-repeat="x in name">{{ x.message }}</label>
+</form>
+<script src="TestApp.js"></script>
+</body>
+</html>
